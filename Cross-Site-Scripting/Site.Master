@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Cross_Site_Scripting.SiteMaster" %>
-
+<meta 
+    http-equiv="Content-Security-Policy" 
+    content="script-src 'self' ; style-src 'self'" 
+     />
 <!DOCTYPE html>
 
 <html lang="en">

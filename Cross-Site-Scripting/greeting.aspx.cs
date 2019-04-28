@@ -27,11 +27,14 @@ namespace Cross_Site_Scripting
             var username = Request.QueryString["q"];
             if (!string.IsNullOrEmpty(username))
             {
-                /////////////Contextual output Encoding////////////////
-                //HTML encoding 
-                lbl_welcome.Text = AntiXssEncoder.HtmlEncode(username, true);
-                //HTML Attribute Encoding 
-                lbl_welcome.Attributes["style"] = "color:red" + AntiXssEncoder.XmlAttributeEncode(username);
+                lbl_welcome.Text = username;
+
+
+                ///////////////Contextual output Encoding////////////////
+                ////HTML encoding 
+                //lbl_welcome.Text = AntiXssEncoder.HtmlEncode(username, true);
+                ////HTML Attribute Encoding 
+                //lbl_welcome.Attributes["style"] = "color:red" + AntiXssEncoder.XmlAttributeEncode(username);
 
                 //Whitelisting filter 
                 //Regex r = new Regex("^[a-zA-Z0-9 ]*$");
