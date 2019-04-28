@@ -18,7 +18,7 @@ namespace Cross_Site_Scripting
             {
                 Value = "Very secret cookie",
                 Expires = DateTime.Now.AddYears(1),
-                HttpOnly = true,
+                HttpOnly = true, // always set the HttpOnly flag for sensitive cookies 
             };
             Response.Cookies.Add(secretCookie);
 
@@ -27,21 +27,18 @@ namespace Cross_Site_Scripting
             var username = Request.QueryString["q"];
             if (!string.IsNullOrEmpty(username))
             {
-                lbl_welcome.Text = username;
 
 
-                ///////////////Contextual output Encoding////////////////
-                ////HTML encoding 
-                //lbl_welcome.Text = AntiXssEncoder.HtmlEncode(username, true);
-                ////HTML Attribute Encoding 
-                //lbl_welcome.Attributes["style"] = "color:red" + AntiXssEncoder.XmlAttributeEncode(username);
-
-                //Whitelisting filter 
-                //Regex r = new Regex("^[a-zA-Z0-9 ]*$");
-                //if (r.IsMatch(username))
-                //    lbl_welcome.Text = "Welcome to our site " + username; 
-                //else
-                //    lbl_welcome.Text = "Please use characters and numbers only";
+                //Whitelisting filter
+                Regex r = new Regex("^[a-zA-Z0-9 ]*$");
+                if (r.IsMatch(username))
+                {
+                    //Output encoding 
+                    string encodedUsername = AntiXssEncoder.XmlAttributeEncode(username);
+                    lbl_welcome.Text = "Welcome to our site " + encodedUsername;
+                }
+                else
+                    lbl_welcome.Text = "Please use characters and numbers only";
             }
             else
                 lbl_welcome.Text = "Please let us know who are you!";
