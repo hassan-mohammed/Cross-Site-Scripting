@@ -17,7 +17,8 @@ namespace Cross_Site_Scripting
             var secretCookie = new HttpCookie("SecretKeys")
             {
                 Value = "Very secret cookie",
-                Expires = DateTime.Now.AddYears(1)
+                Expires = DateTime.Now.AddYears(1),
+                HttpOnly = true,
             };
             Response.Cookies.Add(secretCookie);
 
